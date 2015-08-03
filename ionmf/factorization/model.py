@@ -1,6 +1,5 @@
-from ionmf.factorization.onmf import onmf
+from onmf import onmf
 from numpy import zeros, hstack
-
 
 class iONMF:
     """ Integrative orthogonal non-negative matrix factorization.
