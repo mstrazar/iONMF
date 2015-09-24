@@ -81,7 +81,44 @@ In this demonstrative example, the model is trained on the whole dataset. In the
 
 Each matrix X is plotted along with the approximation W H. Increasing the maximum model rank would yield more accurate approximations.
 
-### RNA-bining proteins dataset (CLIP)
+<insert image>
+
+The details of each step is explained in the comments.
 
 
+### RNA-binding proteins dataset (CLIP)
 
+An application is presented on modeling protein-RNA interaction data as presented in the article above. Currently, 31 CLIP datasets are available corresponding to the numbering adopted in the article.  Each training and test set contains 20% positive (cross-linked positions) and additional data sources: RNA k-mers, RNA structure (as predicted with RNAfold), Region types (genomic annotation), GeneOntology terms and Co-bining (CLIP experiments on other proteins that are not technical or biological replicates).
+
+For each protein, the repository contains 2000 training and test sample postions (genome locations) for each protein. Larger datasets can be downloaded manually from http://bubble.fri.uni-lj.si/ionmf_clip
+
+An example is run as follows
+
+cd ionmf/examples/
+python clip.py  27_ICLIP_TDP43_hg19
+
+where the argument is one of the datasets within the collection:
+
+datasets/
+  clip/
+    11_CLIPSEQ_ELAVL1_hg19
+    17_ICLIP_HNRNPC_hg19
+    22_ICLIP_NSUN2_293_group_4007_all-NSUN2-293-hg19_sum_G_hg19--ensembl59_from_3137-3202_bedGraph-cDNA-hits-in-genome
+    25_CLIPSEQ_SFRS1_hg19
+    27_ICLIP_TDP43_hg19
+    28_ICLIP_TIA1_hg19
+    29_ICLIP_TIAL1_hg19
+    3_HITSCLIP_Ago2_binding_clusters
+    4_HITSCLIP_Ago2_binding_clusters_2
+    5_CLIPSEQ_AGO2_hg19
+    6_CLIP-seq-eIF4AIII_1
+    7_CLIP-seq-eIF4AIII_2
+    
+    A single training / prediction run is perfomed. The positions in the test samples are sampled from genes that do not overlap with training genes. The exact location of the positions can be examined in the corresponding .bedGraph text file, e.g.:
+    datasets/clip/27_ICLIP_TDP43_hg19/2000/training_sample_0/positions.bedGraph.gz
+    
+    
+    Examples of low-dimensional modules for the data sources RNA structure and region types, along with an estimate of each module belongin to either positive/negative examples is shown: 
+    <insert image>
+    
+  The details of each step is explained in the comments.
