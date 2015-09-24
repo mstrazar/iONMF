@@ -1,5 +1,6 @@
 from onmf import onmf
 from numpy import zeros, hstack
+from warnings import filterwarnings
 
 class iONMF:
     """ Integrative orthogonal non-negative matrix factorization.
@@ -48,6 +49,7 @@ class iONMF:
     """
 
     def __init__(self, rank=10, max_iter=100, alpha=1.0):
+        filterwarnings("ignore")
         self.coef_        = None
         self.basis_       = None
         self.keys_        = None
