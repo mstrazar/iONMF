@@ -7,11 +7,11 @@ np.set_printoptions(precision=5)
 def load_data():
 
     # Load data
-    Xp = np.loadtxt(fname="../datasets/yeast_rpr_Xp.txt")   # Features; Positive differential expression
-    Xn = np.loadtxt(fname="../datasets/yeast_rpr_Xn.txt")   # Features; Negative differential expression
-    y0 = np.loadtxt(fname="../datasets/yeast_rpr_y0.txt")   # Class 0 binary vector
-    y1 = np.loadtxt(fname="../datasets/yeast_rpr_y1.txt")   # Class 1 binary vector
-    y2 = np.loadtxt(fname="../datasets/yeast_rpr_y2.txt")   # Class 2 binary vector
+    Xp = np.loadtxt(fname="../datasets/yeast_rpr/yeast_rpr_Xp.txt")   # Features; Positive differential expression
+    Xn = np.loadtxt(fname="../datasets/yeast_rpr/yeast_rpr_Xn.txt")   # Features; Negative differential expression
+    y0 = np.loadtxt(fname="../datasets/yeast_rpr/yeast_rpr_y0.txt")   # Class 0 binary vector
+    y1 = np.loadtxt(fname="../datasets/yeast_rpr/yeast_rpr_y1.txt")   # Class 1 binary vector
+    y2 = np.loadtxt(fname="../datasets/yeast_rpr/yeast_rpr_y2.txt")   # Class 2 binary vector
 
     return {
         "Pos_diff_expr": Xp,
