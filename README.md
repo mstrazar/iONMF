@@ -12,10 +12,12 @@ The framework is simple to use within Python scripts.  Assume the data is repres
 share the same number of rows. 
 
 An iONMF model approximates each matrix X_i with a matrix product W H_i, such that
+```
 X_1 ~ W H_1
 X_2 ~ W H_2
 ...
 X_N ~ W H3
+```
 where W, and H1, H2, ... HN are non-negative matrices of lower ranks and their matrix product approximates the data sources X1, X2, ... XN.
 
 The common coefficient matrix W is common to all data sources and represents clustering of rows, while each basis matrix H1, H2, ... HN represents clustering of columns. Due to non-negativity constraints, the rows of H can be interpreted as commonly occuring combinations of features. 
@@ -27,43 +29,53 @@ Such model can be used to provide and interpetation of the dataset (unsupervised
 The data is assumed to be stored in one or more Numpy arrays (numpy.ndarray) and contain only non-negative values.
 The dataset is then stored as a dictionary
 
+```
 dataset = {
   "data_source_name_1": X1,
   "data_source_name_2": X2,
   "data_source_name_3": X3,
 }
+```
 
 where the keys are data source names and X1, X2 represent matrices (Numpy arrays having the same number of rows.)
 
 ### Running the matrix factorization model
 
 The model is initizalized as a class as follows
+```
 from ionmf.factorization.model import iONMF
 model = iONMF(rank=5, max_iter=100, alpha=1.0)
+```
 
 where rank is the maximum rank of the low-rank approximation, max_iter the number of iterations during optimization and alpha the orthogonality regularization. Higher alpha yields more distinct (orthogonal) basis vectors.
 
 Having prepared the dataset, the model is trained as follows:
+```
 model.fit(dataset)
+```
 
 THe low-rank approximations can be accessed e.g.
+```
 model.basis_["data_source_name_1"]  # Get the basis (H) matrix for data_source_name_1
 model.coef_                         # Get the coefficient (W) matrix
+```
 
-
-Now suppose we have a another set of samples, where one or more data sources are missing.
+Next, suppose we have a another set of samples, where one or more data sources are missing.
+```
 testset = {
   "data_source_name_1": Y1,
   "data_source_name_3": Y3,
 }
+```
 In this example, the data_source_name_2 is missing. Again, Y1...Y3 must share the same number of rows. Having trained a model on the previous (training) dataset, 
 the missing data sources can be filled in.
-
+```
 results = model.predict(testset)
-
+```
 The result is a dictionary results that contains approximations to all data sources that were missing from testset.
+```
 Y2 = results["data_source_name_2"]
-
+```
 
 ## Pre-prepared examples
 
@@ -93,12 +105,13 @@ An application is presented on modeling protein-RNA interaction data as presente
 For each protein, the repository contains 2000 training and test sample postions (genome locations) for each protein. Larger datasets can be downloaded manually from http://bubble.fri.uni-lj.si/ionmf_clip
 
 An example is run as follows
-
+```
 cd ionmf/examples/
 python clip.py  27_ICLIP_TDP43_hg19
+```
 
 where the argument is one of the datasets within the collection:
-
+```
 datasets/
   clip/
     11_CLIPSEQ_ELAVL1_hg19
@@ -113,8 +126,9 @@ datasets/
     5_CLIPSEQ_AGO2_hg19
     6_CLIP-seq-eIF4AIII_1
     7_CLIP-seq-eIF4AIII_2
-    
-    A single training / prediction run is perfomed. The positions in the test samples are sampled from genes that do not overlap with training genes. The exact location of the positions can be examined in the corresponding .bedGraph text file, e.g.:
+```
+
+A single training / prediction run is perfomed. The positions in the test samples are sampled from genes that do not overlap with training genes. The exact location of the positions can be examined in the corresponding .bedGraph text file, e.g.:
     datasets/clip/27_ICLIP_TDP43_hg19/2000/training_sample_0/positions.bedGraph.gz
     
     
