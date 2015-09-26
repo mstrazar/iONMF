@@ -93,7 +93,7 @@ In this demonstrative example, the model is trained on the whole dataset. In the
 
 Each matrix `X` is plotted along with the approximation `W H`. Increasing the maximum model rank would yield more accurate approximations.
 
-<insert image>
+![yeast_rpr](https://raw.githubusercontent.com/mstrazar/iONMF/master/img/yeast_rpr.png)
 
 The details of each step is explained in the comments.
 
@@ -132,6 +132,6 @@ A single training / prediction run is perfomed. The positions in the test sample
     
     
     Examples of low-dimensional modules for the data sources RNA structure and region types, along with an estimate of each module belongin to either positive/negative examples is shown: 
-    <insert image>
+    ![clip](https://raw.githubusercontent.com/mstrazar/iONMF/master/img/clip.png)
     
   The details of each step is explained in the comments within the script.
