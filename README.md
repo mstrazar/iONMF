@@ -8,7 +8,7 @@ Stražar M., Žitnik M., Zupan B., Ule. J, Curk. T: Orthogonal matrix factorizat
 
 
 ## Basic usage
-The framework is simple to use within Python scripts.  Assume the data is represented as matrices X1, X2, ... XN - data source, where rows represent samples and columns represent features. There can be multiple feature matrices as long as they
+The framework is simple to use within Python scripts.  Assume the data is represented as matrices `X1, X2, ... XN` - data sources, where rows represent <i>samples</i> and columns represent features. There can be multiple feature matrices as long as they
 share the same number of rows. 
 
 An iONMF model approximates each matrix X_i with a matrix product W H_i, such that
