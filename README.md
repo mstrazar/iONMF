@@ -131,7 +131,7 @@ datasets/
 A single training / prediction run is perfomed. The positions in the test samples are sampled from genes that do not overlap with training genes. The exact location of the positions can be examined in the corresponding .bedGraph text file, e.g.: `datasets/clip/27_ICLIP_TDP43_hg19/2000/training_sample_0/positions.bedGraph.gz`
     
     
-    Examples of low-dimensional modules for the data sources RNA structure and region types, along with an estimate of each module belongin to either positive/negative examples is shown: 
-    ![clip](https://raw.githubusercontent.com/mstrazar/iONMF/master/img/clip.png)
+Examples of low-dimensional modules for the data sources RNA structure and region types, along with an estimate of each module belongin to either positive/negative examples is shown: 
+![clip](https://raw.githubusercontent.com/mstrazar/iONMF/master/img/clip.png)
     
   The details of each step is explained in the comments within the script.
