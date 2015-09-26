@@ -13,6 +13,9 @@ def load_data():
     y1 = np.loadtxt(fname="../datasets/yeast_rpr/yeast_rpr_y1.txt")   # Class 1 binary vector
     y2 = np.loadtxt(fname="../datasets/yeast_rpr/yeast_rpr_y2.txt")   # Class 2 binary vector
 
+    print Xp.shape
+    print Xn.shape
+
     return {
         "Pos_diff_expr": Xp,
         "Neg_diff_expr": Xn,
