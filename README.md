@@ -13,6 +13,15 @@ iONMF can be installed using the pip package manager (may require root privilege
     pip install ionmf
 ```
 
+iONMF can then be used within Python scripts. To factorize a NumPy array, type
+```
+    import numpy as np
+    from ionmf.factorization.onmf import onmf
+    X = np.random.rand(10, 10)
+    W, H = onmf(X, k=5)
+```
+
+
 ## Basic usage
 The framework is simple to use within Python scripts.  Assume the data is represented as matrices `X1, X2, ..., XN` - data sources, where rows represent <i>samples</i> and columns represent <i>features</i>. There can be multiple feature matrices as long as they share the same number of rows. 
 
