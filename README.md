@@ -6,6 +6,12 @@ For details of the model, please refer to
 Stražar M., Žitnik M., Zupan B., Ule. J, Curk. T: Orthogonal matrix factorization enables integrative analysis of multiple RNA binding proteins
 (to appear).
 
+### Installation
+
+iONMF can be installed using the pip package manager (may require root privileges):
+```
+    pip install ionmf
+```
 
 ## Basic usage
 The framework is simple to use within Python scripts.  Assume the data is represented as matrices `X1, X2, ..., XN` - data sources, where rows represent <i>samples</i> and columns represent <i>features</i>. There can be multiple feature matrices as long as they share the same number of rows. 
@@ -107,9 +113,14 @@ An application is presented on modeling protein-RNA interaction data as presente
 
 For each protein, the repository contains 2000 training and test sample postions (genome locations) for each protein. Larger datasets can be downloaded manually from [here](http://bubble.fri.uni-lj.si/ionmf_clip)
 
+Runtime with full dataset.
+16GB memory and 21 minutes.
+
+
 An example is run as follows
 ```
 cd ionmf/examples/
+export PYTHONPATH="../.."
 python clip.py  27_ICLIP_TDP43_hg19
 ```
 
@@ -117,25 +128,50 @@ where the argument is one of the datasets within the collection:
 ```
 datasets/
   clip/
-    11_CLIPSEQ_ELAVL1_hg19
-    17_ICLIP_HNRNPC_hg19
-    22_ICLIP_NSUN2_293_group_4007_all-NSUN2-293-hg19_sum_G_hg19--ensembl59_from_3137-3202_bedGraph-cDNA-hits-in-genome
-    25_CLIPSEQ_SFRS1_hg19
-    27_ICLIP_TDP43_hg19
-    28_ICLIP_TIA1_hg19
-    29_ICLIP_TIAL1_hg19
+    1_PARCLIP_AGO1234_hg19
+    2_PARCLIP_AGO2MNASE_hg19
     3_HITSCLIP_Ago2_binding_clusters
     4_HITSCLIP_Ago2_binding_clusters_2
     5_CLIPSEQ_AGO2_hg19
     6_CLIP-seq-eIF4AIII_1
     7_CLIP-seq-eIF4AIII_2
+    8_PARCLIP_ELAVL1_hg19
+    9_PARCLIP_ELAVL1MNASE_hg19
+    10_PARCLIP_ELAVL1A_hg19
+    11_CLIPSEQ_ELAVL1_hg19
+    12_PARCLIP_EWSR1_hg19
+    13_PARCLIP_FUS_hg19
+    14_PARCLIP_FUS_mut_hg19
+    15_PARCLIP_IGF2BP123_hg19
+    16_ICLIP_hnRNPC_Hela_iCLIP_all_clusters
+    17_ICLIP_HNRNPC_hg19
+    18_ICLIP_hnRNPL_Hela_group_3975_all-hnRNPL-Hela-hg19_sum_G_hg19--ensembl59_from_2337-2339-741_bedGraph-cDNA-hits-in-genome
+    19_ICLIP_hnRNPL_U266_group_3986_all-hnRNPL-U266-hg19_sum_G_hg19--ensembl59_from_2485_bedGraph-cDNA-hits-in-genome
+    20_ICLIP_hnRNPlike_U266_group_4000_all-hnRNPLlike-U266-hg19_sum_G_hg19--ensembl59_from_2342-2486_bedGraph-cDNA-hits-in-genome
+    21_PARCLIP_MOV10_Sievers_hg19
+    22_ICLIP_NSUN2_293_group_4007_all-NSUN2-293-hg19_sum_G_hg19--ensembl59_from_3137-3202_bedGraph-cDNA-hits-in-genome
+    23_PARCLIP_PUM2_hg19
+    24_PARCLIP_QKI_hg19
+    25_CLIPSEQ_SFRS1_hg19
+    26_PARCLIP_TAF15_hg19
+    27_ICLIP_TDP43_hg19
+    28_ICLIP_TIA1_hg19
+    29_ICLIP_TIAL1_hg19
+    30_ICLIP_U2AF65_Hela_iCLIP_ctrl_all_clusters
+    31_ICLIP_U2AF65_Hela_iCLIP_ctrl+kd_all_clusters
 ```
 
-A single training / prediction run is perfomed. The positions in the test samples are sampled from genes that do not overlap with training genes. The exact location of the positions can be examined in the corresponding .bedGraph text file, e.g.: `datasets/clip/27_ICLIP_TDP43_hg19/2000/training_sample_0/positions.bedGraph.gz`
+The `master` branch include only one training/test sample of positions of size 5000 per protein.
+Larger datasets with 30000 positions as well as more training/test splits are available at
+branche `master_full`.
+
+
+A single training / prediction run is perfomed.
+The positions in the test samples are sampled from genes that do not overlap with training genes. The exact location of the positions can be examined in the corresponding .bedGraph text file, e.g.: `datasets/clip/27_ICLIP_TDP43_hg19/2000/training_sample_0/positions.bedGraph.gz`
     
     
 Examples of low-dimensional modules for the data sources RNA structure and region types, along with an estimate of each module belongin to either positive/negative examples is shown: 
 
 ![clip](https://raw.githubusercontent.com/mstrazar/iONMF/master/img/clip.png)
-    
+
   The details of each step is explained in the comments within the script.
