@@ -1,0 +1,99 @@
+<html>
+<title>iONMF modules README</title>
+<head>
+<style>
+pre {
+    background-color: linen;
+}
+
+h1 {
+    color: maroon;
+} 
+</style>
+</head>
+
+<body>
+
+<h1>Description</h1> 
+
+The modules displayed in the article are stored as part of the Supplementary material of the article:
+
+<p>
+<i>Strazar M., Zitnik M., Zupan B., Ule J., Curk T.: Orthogonal matrix factorization
+enables integrative analysis of multiple RNA binding proteins</i> . 
+</p>
+
+
+Below we briefly present five different data sources used in the study. Each data source stores different RNA features associated to
+positions within protein-coding genes. The file <i>positions.pkl.gz</i> stores the exact positions associated to each row.
+
+<p>We provide sets of training and test samples, selected as used in the study. The test samples are constrained to be
+in a different set of genes than in the training sample. <p>
+
+
+<pre>
+    training_sample_0/
+    training_sample_1/
+    training_sample_2/
+    test_sample_0/
+    test_sample_1/
+    test_sample_2/
+</pre>
+
+<p>The data sources <i>Experiments (Co-binding), RNA k-mers, Region Type and RNAfold</i>
+present various RNA features in the interval [-50, 50] around the cross-link sites. The features therefore come in groups of 101, sorted in increasing 
+order within this interval (not that the exact position within the interval is thus stored implicitly). The data source <i>Gene Ontology</i> stores
+GO terms associated to genes corresponding to the positions.</p>
+
+<h3>Experiments (Co-binding)</h3>
+<p>Experimentally determined co-binding of different RBP. These features are different fo each target
+RBP, as we make sure that features do not belong to same experiments group (see Supplementary Table 1).
+The first 101 features represent binding of CLIPSEQ_AGO2_hg19, the second 101
+represent binding of CLIPSEQ_ELAVL1_hg19, etc. The identifiers in square brackets correspond to Supplementary Table 1. 
+within the article.</p> 
+<pre>
+CLIPSEQ_AGO2_hg19   CLIPSEQ_AGO2_hg19 ...   CLIPSEQ_AGO2_hg19   CLIPSEQ_ELAVL1_hg19 CLIPSEQ_ELAVL1_hg19 ... CLIPSEQ_ELAVL1_hg19
+0.00    0.00 ...    0.00    1.00    0.00 ...    0.00
+0.00    1.00 ...    0.00    0.00    0.00 ...    0.00
+0.00    0.00 ...    0.00    0.00    0.00 ...    1.00
+</pre>
+
+<h3>GeneOntology</h3>
+The features represent the GO terms associated to genes.
+<pre>
+GO:0000001: mitochondrion inheritance   GO:0000002: mitochondrial genome maintenance ...    GO:2001317: kojic acid biosynthetic process
+0.00    1.00 ...    0.00
+0.00    0.00 ...    0.00
+0.00    0.00 ...    1.00
+</pre>
+
+<h3>Region Type</h3>
+<p>Annotation of genomic regions for five region types: exons, introns, ORF, 5'UTR and 3'UTR. The first 101 features represent presence of introns, the second 101 presence of ORF, etc. </p>
+<pre>
+intron  intron ...  intron  ORF ORF ... ORF 5UTR    5UTR ...    5UTR    3UTR    3UTR ...    3UTR
+1.00    1.00 ...    1.00    0.00    0.00 ...    0.00    0.00    0.00 ...    0.00    0.00    0.00 ...    0.00
+0.00    0.00 ...    0.00    0.00    0.00 ...    0.00    0.00    0.00 ...    0.00    0.00    0.00 ...    0.00
+0.00    0.00 ...    0.00    1.00    1.00 ...    0.00    0.00    0.00 ...    0.00    0.00    0.00 ...    0.00
+</pre>
+
+<h3>RNA k-mers</h3>
+<p>Sequence information in a binary matrix of RNA k-mers. The blocks of 101 features repersent the presence of all 4-mers.</p>
+<pre>
+AAAA    AAAA ...    TTTT    TTTT
+0.00    0.00 ...    1.00    0.00
+0.00    1.00 ...    0.00    0.00
+0.00    0.00 ...    0.00    1.00
+</pre>
+
+<h3>RNAfold</h3>
+<p>The values represent probabilities that the nucleotides within the interval [-50...50] nt around cross-link sites 
+are part iof double-stranded RNA in the secondary structure, as predicted with RNALfold and averaged over all possible transcript isoforms.</p>
+<pre>
+dsRNA   dsRNA ...   dsRNA
+0.00    0.00 ...    0.00
+0.80    1.00 ...    0.94
+0.11    0.11 ...    0.33
+</pre>
+</body>
+
+</html>
