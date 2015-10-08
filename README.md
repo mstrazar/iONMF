@@ -88,8 +88,7 @@ Y2 = results["data_source_2"]
 Prepared practical examples for usage of the model are available.
 
 ### Yeast RPR dataset
-See [ionmf.examples.yeast_rpr.py](https://github.com/mstrazar/iONMF/blob/master/examples/yeast_rpr.py) . 
-
+See ionmf.example.yeast_rpr.py 
 A simple example of running iONMF on a differential gene expression dataset. The dataset contains 186 samples and 79 genes, divided into 3 classes. 
 
 Some values in the matrix `X` contain negative values. The following trick is used. The number of columns is doubled to form the matrices `Xp`, `Xn` each of size (186 rows, 79 columns). All positive values are stored in `Xp`, while absolute values of negative cells are stored in `Xn`.
@@ -107,11 +106,13 @@ The details of each step is explained in the comments.
 
 ### RNA-binding proteins dataset (CLIP)
 
-See [ionmf.examples.clip.py](https://github.com/mstrazar/iONMF/blob/master/examples/clip.py) . 
-
 An application is presented on modeling protein-RNA interaction data as presented in the article above. Currently, 31 CLIP datasets are available corresponding to the numbering adopted in the article.  Each training and test set contains 20% positive (cross-linked positions) and additional data sources: RNA k-mers, RNA structure (as predicted with RNAfold), Region types (genomic annotation), GeneOntology terms and Co-bining (CLIP experiments on other proteins that are not technical or biological replicates).
 
-For each protein, the repository contains 2000 training and test sample postions (genome locations) for each protein. Larger datasets can be downloaded manually from [here](http://bubble.fri.uni-lj.si/ionmf_clip)
+The `master` branch include only one training/test sample of positions of size 5000 per protein.
+Larger datasets with 30000 positions as well as more training/test splits are available at
+branch `master_full`. For more details on the format of data, see [/datasets/clip/README.html](/datasets/clip/README.html).
+Characteristic data-source featue values, presented in the article Suplementary Section 7 are
+ available within branch `master_full` at [/features](/features)
 
 
 An example is run as follows
@@ -157,10 +158,6 @@ datasets/
     30_ICLIP_U2AF65_Hela_iCLIP_ctrl_all_clusters
     31_ICLIP_U2AF65_Hela_iCLIP_ctrl+kd_all_clusters
 ```
-
-The `master` branch include only one training/test sample of positions of size 5000 per protein.
-Larger datasets with 30000 positions as well as more training/test splits are available at
-branche `master_full`. For more details on the format of data, see /datasets/clip/README.html.
 
 A desired subset of data sources is seleted via the method
 
