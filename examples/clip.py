@@ -15,18 +15,26 @@ def load_data(path, kmer=True, rg=True, clip=True, rna=True, go=True):
     """
 
     data = dict()
-    if go:   data["X_GO"]   = pickle.load(gzip.open(os.path.join(path,
-                                            "matrix_GeneOntology.pkl.gz")))
-    if kmer: data["X_KMER"] = pickle.load(gzip.open(os.path.join(path,
-                                            "matrix_RNAkmers.pkl.gz")))
-    if rg:   data["X_RG"]   = pickle.load(gzip.open(os.path.join(path,
-                                            "matrix_RegionType.pkl.gz")))
-    if clip: data["X_CLIP"] = pickle.load(gzip.open(os.path.join(path,
-                                            "matrix_Cobinding.pkl.gz")))
-    if rna:  data["X_RNA"]  = pickle.load(gzip.open(os.path.join(path,
-                                            "matrix_RNAfold.pkl.gz")))
-    data["Y"] = pickle.load(gzip.open(os.path.join(path,
-                                            "matrix_Response.pkl.gz")))
+    if go:   data["X_GO"]   = np.loadtxt(gzip.open(os.path.join(path,
+                                            "matrix_GeneOntology.tab.gz")),
+                                            skiprows=1)
+    if kmer: data["X_KMER"] = np.loadtxt(gzip.open(os.path.join(path,
+                                            "matrix_RNAkmers.tab.gz")),
+                                            skiprows=1)
+    if rg:   data["X_RG"]   = np.loadtxt(gzip.open(os.path.join(path,
+                                            "matrix_RegionType.tab.gz")),
+                                            skiprows=1)
+    if clip: data["X_CLIP"] = np.loadtxt(gzip.open(os.path.join(path,
+                                            "matrix_Cobinding.tab.gz")),
+                                            skiprows=1)
+    if rna:  data["X_RNA"]  = np.loadtxt(gzip.open(os.path.join(path,
+                                            "matrix_RNAfold.tab.gz")),
+                                            skiprows=1)
+    data["Y"] = np.loadtxt(gzip.open(os.path.join(path,
+                                            "matrix_Response.tab.gz")),
+                                            skiprows=1)
+    data["Y"] = data["Y"].reshape((len(data["Y"]), 1))
+
     return data
 
 
@@ -36,16 +44,16 @@ def load_labels(path, kmer=True, rg=True, clip=True, rna=True, go=True):
     """
 
     labels = dict()
-    labels["X_GO"]   = pickle.load(gzip.open(os.path.join(path,
-                                            "labels_GeneOntology.pkl.gz")))
-    labels["X_KMER"] = pickle.load(gzip.open(os.path.join(path,
-                                            "labels_RNAkmers.pkl.gz")))
-    labels["X_RG"]   = pickle.load(gzip.open(os.path.join(path,
-                                            "labels_RegionType.pkl.gz")))
-    labels["X_CLIP"] = pickle.load(gzip.open(os.path.join(path,
-                                            "labels_Cobinding.pkl.gz")))
-    labels["X_RNA"]  = pickle.load(gzip.open(os.path.join(path,
-                                            "labels_RNAfold.pkl.gz")))
+    if go: labels["X_GO"]   = gzip.open(os.path.join(path,
+                        "matrix_GeneOntology.tab.gz")).readline().split("\t")
+    if kmer: labels["X_KMER"] = gzip.open(os.path.join(path,
+                        "matrix_RNAkmers.tab.gz")).readline().split("\t")
+    if rg: labels["X_RG"]   = gzip.open(os.path.join(path,
+                        "matrix_RegionType.tab.gz")).readline().split("\t")
+    if clip: labels["X_CLIP"] = gzip.open(os.path.join(path,
+                        "matrix_Cobinding.tab.gz")).readline().split("\t")
+    if rna: labels["X_RNA"]  = gzip.open(os.path.join(path,
+                        "matrix_RNAfold.tab.gz")).readline().split("\t")
     return labels
 
 
@@ -55,11 +63,11 @@ def run():
     protein = sys.argv[1]
 
     # Load training data and column labels
-    training_data = load_data("../datasets/clip/%s/2000/training_sample_0"
+    training_data = load_data("../datasets/clip/%s/5000/training_sample_0"
                               % protein,
                               go=False, kmer=False)
-    training_labels = load_labels("../datasets/clip/%s/2000/training_sample_0"
-                                  % protein,)
+    training_labels = load_labels("../datasets/clip/%s/5000/training_sample_0"
+                                  % protein, go=False, kmer=False)
     model = iONMF(rank=5, max_iter=100, alpha=10.0)
 
     # Fit all training data
@@ -67,7 +75,7 @@ def run():
 
     # Make predictions about class on all training data
     # delete class from dictionary
-    test_data = load_data("../datasets/clip/%s/2000/test_sample_0" % protein,
+    test_data = load_data("../datasets/clip/%s/5000/test_sample_0" % protein,
                           go=False, kmer=False)
     true_y = test_data["Y"].copy()
     del test_data["Y"]
