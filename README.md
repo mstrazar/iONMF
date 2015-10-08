@@ -113,9 +113,6 @@ An application is presented on modeling protein-RNA interaction data as presente
 
 For each protein, the repository contains 2000 training and test sample postions (genome locations) for each protein. Larger datasets can be downloaded manually from [here](http://bubble.fri.uni-lj.si/ionmf_clip)
 
-Runtime with full dataset.
-16GB memory and 21 minutes.
-
 
 An example is run as follows
 ```
@@ -163,7 +160,22 @@ datasets/
 
 The `master` branch include only one training/test sample of positions of size 5000 per protein.
 Larger datasets with 30000 positions as well as more training/test splits are available at
-branche `master_full`.
+branche `master_full`. For more details on the format of data, see /datasets/clip/README.html.
+
+A desired subset of data sources is seleted via the method
+
+```
+def load_data(path,
+    kmer    = True,   # RNA k-mers
+    rg      = True,   # Region Type
+    clip    = True,   # Experiments (cobinding)
+    rna     = True,   # RNAfold structure prediction
+    go      = True,   # Gene Ontology terms
+    )
+```
+
+A run including all data sources required 12 GB of RAM and completes in
+21 minutes on a 2GHz CPU. Support for sparse matrices is under construction.
 
 
 A single training / prediction run is perfomed.
