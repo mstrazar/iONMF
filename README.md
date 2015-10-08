@@ -13,12 +13,12 @@ iONMF can be installed using the pip package manager (may require root privilege
     pip install ionmf
 ```
 
-iONMF can then be used within Python scripts. To factorize a NumPy array, type
+iONMF can then be used within Python scripts. To factorize a NumPy array, type:
 ```
     import numpy as np
     from ionmf.factorization.onmf import onmf
     X = np.random.rand(10, 10)
-    W, H = onmf(X, k=5)
+    W, H = onmf(X, k=5, alpha=1.0)
 ```
 
 
